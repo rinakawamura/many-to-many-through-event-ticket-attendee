@@ -33,6 +33,13 @@ class Attendee
         end
         total
     end
+
+    def venues
+        self.events.map do |event|
+            event.venue
+        end
+    end
+
 end
 
 # Attendee.all

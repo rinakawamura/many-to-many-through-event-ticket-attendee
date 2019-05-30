@@ -1,14 +1,14 @@
 require_relative "./ticket.rb"
 
 class Event
-    attr_accessor :name, :total_cost, :ticket_price#, :venue
+    attr_accessor :name, :total_cost, :ticket_price, :venue
     @@all = []
 
-    def initialize(name, total_cost, ticket_price)
+    def initialize(name, total_cost, ticket_price, venue)
         @name = name
         @total_cost = total_cost
         @ticket_price = ticket_price
-        #@venue = venue
+        @venue = venue
         @@all << self
     end
 
