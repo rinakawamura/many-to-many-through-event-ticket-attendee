@@ -1,4 +1,56 @@
+require_relative "./ticket.rb"
+
 class Event
+    attr_accessor :name, :total_cost, :ticket_price#, :venue
+    @@all = []
+
+    def initialize(name, total_cost, ticket_price)
+        @name = name
+        @total_cost = total_cost
+        @ticket_price = ticket_price
+        #@venue = venue
+        @@all << self
+    end
+
+    def self.all 
+        @@all
+    end
+
+    def tickets
+        Ticket.all.select do |ticket|
+            ticket.event == self
+        end
+    end
+
+    def sell_to_break_even
+        tickets_sold = self.tickets.size
+        diff = @total_cost - @ticket_price * tickets_sold
+        if diff <= 0
+            0
+        else
+            diff/@ticket_price
+        end
+    end
+
+    def attendees
+        self.tickets.map do |ticket|
+            ticket.attendee
+        end
+    end
+
+    def average_age
+        total = 0
+        attendees = self.attendees
+        attendees.each do |attendee|
+            total += attendee.age
+        end
+        if attendees.size > 0
+            total/attendees.size
+        else
+            0
+        end
+    end
+
 end
 
 # Event.all
